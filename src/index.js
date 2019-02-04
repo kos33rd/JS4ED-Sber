@@ -1,39 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Button from '@material-ui/core/Button'
+import React from "react"
+import ReactDOM from "react-dom"
+import Articles from './pages/articles'
+import Counter from "./pages/counter"
 
-import Counter from './counter'
+import { BrowserRouter, Route, Link } from 'react-router-dom'
 
-class App extends React.Component {
+const App = () =>
+    <BrowserRouter>
+        <div>
+            <ul>
+                <li><Link to="/articles">Articles</Link></li>
+                <li><Link to="/counter">Counter</Link></li>
+            </ul>
 
-    state = {
-        articles: []
-    }
-
-    loadNews = () => {
-        fetch('https://meduza.io/api/v3/search?chrono=news&locale=ru&page=0&per_page=24')
-            .then(response => {
-                return response.json()
-            })
-            .then((data) => {
-                this.setState({articles: Object.values(data.documents)})
-            })
-    }
-
-    render() {
-        return (
-            <div>
-                <Button onClick={this.loadNews}>
-                    Загрузить новости
-                </Button>
-                <ul>
-                    {this.state.articles.map(article => (
-                        <li key={article.title}>{article.title}</li>
-                    ))}
-                </ul>
-            </div>
-        )
-    }
-}
+            <Route path="/articles*" component={Articles}/>
+            <Route path="/counter" component={Counter}/>
+        </div>
+    </BrowserRouter>
 
 ReactDOM.render(<App/>, document.getElementById('app'))

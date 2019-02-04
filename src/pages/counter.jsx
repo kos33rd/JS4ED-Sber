@@ -4,12 +4,13 @@ import Paper from '@material-ui/core/Paper'
 
 export default class Counter extends React.Component {
     state = { count: this.props.initialCount || 0 }
-    sub = () => { 
+    sub = () => {
         this.setState({ count: this.state.count - 1 })
     }
     add = () => {
         this.setState({ count: this.state.count + 1 })
     }
+
     render() {
         return (
             <Paper>
