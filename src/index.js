@@ -1,20 +1,20 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import Articles from './pages/articles'
-import Counter from "./pages/counter"
+import CharactersList from './pages/characters-list/characters-list'
+import CharacterDetails from "./pages/character-details/character-details"
 
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import Bar from "./layout/bar"
 
 const App = () =>
     <BrowserRouter>
         <div>
-            <ul>
-                <li><Link to="/articles">Articles</Link></li>
-                <li><Link to="/counter">Counter</Link></li>
-            </ul>
-
-            <Route path="/articles*" component={Articles}/>
-            <Route path="/counter" component={Counter}/>
+            <Bar />
+            <Switch>
+                <Route path="/characters/:characterId" component={CharacterDetails} />
+                <Route path="/characters*" component={CharactersList} />
+                <Redirect from="*" to="/characters" />
+            </Switch>
         </div>
     </BrowserRouter>
 

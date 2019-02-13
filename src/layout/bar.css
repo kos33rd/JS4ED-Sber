@@ -1,0 +1,19 @@
+
+
+.toolbar {
+    display: flex;
+}
+
+.toolbar-title {
+    flex: 1;
+}
+
+.search {
+    width: 340px;
+    display: flex;
+}
+
+.search-field {
+    flex: 1;
+    padding-left: 12px;
+}
