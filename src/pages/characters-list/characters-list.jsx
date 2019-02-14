@@ -1,12 +1,10 @@
 import React from "react"
 import Grid from "@material-ui/core/Grid"
+import { connect } from 'react-redux'
 
 import { CharacterCard } from "./character-card"
 
-
-export default class CharactersList extends React.Component {
-
-    state = { characters: [] }
+class CharactersList extends React.Component {
 
     loadCharacters = (query) => {
         const searchQuery = query ? `?name=${query}` : ''
@@ -16,7 +14,7 @@ export default class CharactersList extends React.Component {
                 return response.json()
             })
             .then((data) => {
-                this.setState({ characters: data.results })
+                this.props.saveCharactersToStore(data.results)
             })
     }
 
@@ -35,9 +33,10 @@ export default class CharactersList extends React.Component {
     }
 
     render() {
+        console.log('dataFromStore:', this.props.characters)
         return (
             <Grid container spacing={40}>
-                {this.state.characters.map(character => (
+                {this.props.characters.map(character => (
                     <CharacterCard
                         key={character.id}
                         character={character}
@@ -48,3 +47,20 @@ export default class CharactersList extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        characters: state.characters
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveCharactersToStore: (characters) => dispatch({
+            type: 'SAVE_CHARACTERS_TO_STORE',
+            characters: characters
+        })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CharactersList)
