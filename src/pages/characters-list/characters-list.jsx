@@ -59,7 +59,8 @@ const mapDispatchToProps = (dispatch) => {
         saveCharactersToStore: (characters) => dispatch({
             type: 'SAVE_CHARACTERS_TO_STORE',
             characters: characters
-        })
+        }),
+
     }
 }
 

@@ -9,6 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { withRouter } from 'react-router-dom'
 
 import styles from './bar.css'
+import { connect } from "react-redux"
 
 
 class Bar extends React.PureComponent {
@@ -26,7 +27,7 @@ class Bar extends React.PureComponent {
             <AppBar position="static">
                 <Toolbar className={styles.toolbar}>
                     <Typography className={styles["toolbar-title"]} variant="h6" color="inherit" noWrap>
-                        Rick and Morty characters
+                        Rick and Morty characters {this.props.characters.length}
                     </Typography>
 
                     <Paper elevation={1} className={styles.search}>
@@ -46,4 +47,10 @@ class Bar extends React.PureComponent {
     }
 }
 
-export default withRouter(Bar)
+const mapStateToProps = (state) => {
+    return {
+        characters: state.characters
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Bar))

@@ -1,4 +1,4 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
 
 const reducer = (prevState, action) => {
     console.log('Reducer called with action:', action)
-
+    
     if (action.type === 'SAVE_CHARACTERS_TO_STORE') {
         return {
             characters: action.characters

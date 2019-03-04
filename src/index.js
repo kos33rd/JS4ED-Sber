@@ -8,6 +8,7 @@ import CharacterDetails from "./pages/character-details/character-details"
 import Bar from "./layout/bar"
 
 import { store } from "./store"
+import Chart from "./pages/chart"
 
 const App = () =>
     <Provider store={store}>
@@ -17,6 +18,7 @@ const App = () =>
                 <Switch>
                     <Route path="/characters/:characterId" component={CharacterDetails} />
                     <Route path="/characters*" component={CharactersList} />
+                    <Route path="/chart" component={Chart} />
                     <Redirect from="*" to="/characters" />
                 </Switch>
             </div>
